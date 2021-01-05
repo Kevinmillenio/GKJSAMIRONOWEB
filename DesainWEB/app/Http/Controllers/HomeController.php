@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Message;
 use Illuminate\Http\Request;
+use Exception;
 
 class HomeController extends Controller
 {
@@ -23,7 +25,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $message = Message::all();
+        return view('home')->with('messages',$message);
+    }
+
+    public function deleteMessage(Request $request){
+        $message = Message::findOrFail($request->id);
+        try{
+            $message->delete();
+            return redirect('home')->with('success','Data berhasil dihapus!');
+        }catch(Exception $e){
+            return redirect('home')->with('err', $e);
+        }
     }
 
 }
