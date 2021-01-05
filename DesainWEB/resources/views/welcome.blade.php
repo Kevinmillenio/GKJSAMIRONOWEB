@@ -307,6 +307,14 @@
             <li><a href="#">Terms of Use</a></li>
             <li><a href="#">Disclaimers</a></li>
             <li><a href="#">Contact</a></li>
+            @guest
+            <li><a href="/login">Login</a></li>
+            @else    
+            <li><form action='/logout' method="post">
+              @csrf
+              <a onclick="this.closest('form').submit();return false;" type="submit" href="">Logout</a>
+            </form></li>
+            @endguest
           </ul>
         </div>
         <div class="col-md-3">
