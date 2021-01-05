@@ -38,3 +38,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/contact','GuestController@contact')->name('contact');
 Route::post('/send/message','GuestController@tulispesan')->name('send_message');
+
+Route::get('/message/delete/{id}','HomeController@deleteMessage');
+Route::get('/temp',function(){
+    return view('temp');
+});
